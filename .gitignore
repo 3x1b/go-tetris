@@ -23,3 +23,10 @@ go.work.sum
 
 # env file
 .env
+
+# Go files made from libraries
+*.mod
+*.sum
+
+# Ignore text files (usually notes)
+*.txt
