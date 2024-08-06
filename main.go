@@ -60,7 +60,7 @@ func draw_piece() {
 		offset := [2]int{8, 8}
 		destRect := rl.NewRectangle(float32(dimensions[i][2]*16*int(scale)+offset[0]), float32(dimensions[i][3]*16*int(scale)+offset[1]), 16*scale, 16*scale)
 		origin := rl.NewVector2(0, 0)
-		rl.DrawTexturePro(tileset, srcRect, destRect, origin, 0, rl.White)
+		rl.DrawTexturePro(tileset, srcRect, destRect, origin, 0, rl.Pink)
 	}
 }
 
