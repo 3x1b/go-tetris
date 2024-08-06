@@ -16,7 +16,8 @@ const (
 // Sprites
 
 var (
-	gopher rl.Texture2D
+	gopher  rl.Texture2D
+	tileset rl.Texture2D
 )
 
 func update() {} // Nothing right now
@@ -30,6 +31,7 @@ func init() {
 	rl.SetTargetFPS(60)
 
 	gopher = rl.LoadTexture("gopher.png")
+	tileset = rl.LoadTexture("tileset.png")
 }
 
 func input() {
@@ -40,7 +42,8 @@ func input() {
 	} else if rl.IsKeyDown(rl.KeyF11) && !fs_key {
 		rl.ToggleFullscreen()
 		fs_key = true
-	} else {
+	} else if !(rl.IsKeyDown(rl.KeyLeftAlt) && rl.IsKeyDown(rl.KeyEnter)) &&
+		!(rl.IsKeyDown(rl.KeyF11)) && fs_key {
 		fs_key = false
 	}
 
