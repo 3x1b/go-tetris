@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 
+	piecelib "tetris/pkg/draw_tile"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -49,6 +51,18 @@ func input() {
 
 }
 
+func draw_piece() {
+	dimensions := piecelib.DrawTile("T")
+	var scale float32 = 8.0
+
+	for i := 0; i < len(dimensions); i++ {
+		srcRect := rl.NewRectangle(float32(dimensions[i][0]*16), float32(dimensions[i][1]*16), 16, 16)
+		destRect := rl.NewRectangle(float32(dimensions[i][2]*16*int(scale)), float32(dimensions[i][3]*16*int(scale)), 16*scale, 16*scale)
+		origin := rl.NewVector2(0, 0)
+		rl.DrawTexturePro(tileset, srcRect, destRect, origin, 0, rl.White)
+	}
+}
+
 func draw() {
 
 	rl.BeginDrawing()
@@ -56,7 +70,7 @@ func draw() {
 	rl.ClearBackground(rl.RayWhite)
 	rl.DrawText(fmt.Sprintf("Time elapsed: %d seconds", int(frames/60)), 0, 0, 40, rl.Black)
 
-	rl.DrawTexture(gopher, 0, 0, rl.White)
+	draw_piece()
 
 	rl.EndDrawing()
 }

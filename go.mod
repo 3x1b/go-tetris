@@ -1,4 +1,4 @@
-module raylib-test-80085
+module tetris
 
 go 1.22.5
 
