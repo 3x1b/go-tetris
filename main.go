@@ -49,16 +49,24 @@ func input() {
 		fs_key = false
 	}
 
+	if rl.IsKeyPressed(rl.KeyA) {
+		piece_x -= 1
+	} else if rl.IsKeyPressed(rl.KeyD) {
+		piece_x += 1
+	}
+
 }
+
+var piece_x, piece_y int = 0, 0
 
 func draw_piece() {
 	dimensions := piecelib.DrawTile("T")
-	var scale float32 = 8.0
+	var scale int = 4
 
 	for i := 0; i < len(dimensions); i++ {
 		srcRect := rl.NewRectangle(float32(dimensions[i][0]*16), float32(dimensions[i][1]*16), 16, 16)
-		offset := [2]int{8, 8}
-		destRect := rl.NewRectangle(float32(dimensions[i][2]*16*int(scale)+offset[0]), float32(dimensions[i][3]*16*int(scale)+offset[1]), 16*scale, 16*scale)
+		offset := [2]int{8 + (piece_x * 16 * scale), 8 + (piece_y * 16 * scale)}
+		destRect := rl.NewRectangle(float32(dimensions[i][2]*16*scale+offset[0]), float32(dimensions[i][3]*16*scale+offset[1]), float32(16*scale), float32(16*scale))
 		origin := rl.NewVector2(0, 0)
 		rl.DrawTexturePro(tileset, srcRect, destRect, origin, 0, rl.NewColor(255, 0, 255, 255))
 	}
@@ -69,7 +77,8 @@ func draw() {
 	rl.BeginDrawing()
 
 	rl.ClearBackground(rl.RayWhite)
-	rl.DrawText(fmt.Sprintf("Time elapsed: %d seconds", int(frames/60)), 0, 0, 40, rl.Black)
+	rl.DrawText(fmt.Sprintf("Time elapsed: %d seconds", int(frames/60)), 0, 0, 0, rl.White)
+	rl.DrawText("hamburger", 90, height-90-40, 40, rl.Green)
 
 	draw_piece()
 
